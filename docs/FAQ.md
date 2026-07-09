@@ -19,7 +19,7 @@ Claude Code and Codex today. More assistants are under consideration — [tell u
 ## Privacy
 
 ### Does it read my code?
-**No.** It reads token *counts* from the usage logs those tools already keep locally — never file contents, prompts, or conversations. Full details in the [privacy notes](PRIVACY.md).
+**No.** It reads the usage logs those tools already keep locally and uses only their metadata — token counts, model names, timestamps, session titles. It never opens your code files, and never stores or uploads prompts or conversations. Full details in the [Privacy Notice](PRIVACY.md).
 
 ### Does it need the internet?
 No. Everything works fully offline. The single optional network feature is the leaderboard, which is off until you enable it — and leaving it deletes your entry.
@@ -50,10 +50,10 @@ Switch to **capsule mode** — a tiny status pill in the corner — or toggle al
 ## Leaderboard
 
 ### What does the leaderboard upload?
-Nickname, region, current species, tree token total, and growth stage — nothing else, tied to an anonymous account. See [privacy notes](PRIVACY.md).
+Exactly what its consent dialog lists: an anonymous ID, nickname, region, current species, and each tree's token total and growth stage — nothing else. See the [Privacy Notice](PRIVACY.md).
 
 ### How do I get off the leaderboard?
-Turn it off in the app. Your entry is deleted from the server, not just hidden.
+Turn it off in the app. It asks the server to delete your entry — removed from the board, not just hidden.
 
 ## Anything else?
 

@@ -1,50 +1,115 @@
-# Token Forest — Privacy Notes 🔒
+# Token Forest Privacy Notice
 
 [English](PRIVACY.md) · [简体中文](PRIVACY.zh-CN.md)
 
-Token Forest exists because we wanted a cozy way to *see* our own AI usage — not to collect anyone's data. This page explains, in plain language, exactly what the app touches.
+**Version 1.0-beta (pre-release draft) · Last updated 2026-07-08 · Effective at first public release**
+**Publisher: Poietic Studio**
 
-## The one rule
+Token Forest is a desktop companion that turns your Claude Code / OpenAI Codex usage into a growing pixel tree. This notice describes exactly what the app reads, stores, and — only if you opt in — uploads. The same text is published at [tokenforest.com.au/privacy](https://www.tokenforest.com.au/privacy); this file's git history is the public change log of the policy.
 
-**What happens on your machine stays on your machine.**
+## Summary
 
-## What Token Forest reads
+- Core features run **entirely on your device**. No account, no API key, no network needed.
+- The app contains **no telemetry, no ads, no crash reporting, no auto-update phoning home**.
+- It reads the **usage logs your AI coding tools already write locally** — never your source-code files.
+- It does **not store or upload prompts or conversation content**.
+- The **global leaderboard is optional and off by default**. Before it turns on, the app shows a consent dialog listing every field it would sync. Turning it off requests deletion of your entry.
+- We do not sell personal data. There is nothing to sell — by default we never receive any.
 
-Claude Code and Codex already keep usage logs on your computer (that's how their own tools report usage). Token Forest reads **only the token counts** from those local files:
+## What the app reads locally
 
-- input tokens, output tokens, cache-read tokens, cache-write tokens
-- the model name and timestamp of each entry (for per-model stats and daily curves)
+Token Forest reads the local usage logs created by supported tools:
 
-That's the whole list.
+```text
+Claude Code:  ~/.claude/projects/**/*.jsonl
+OpenAI Codex: ~/.codex/sessions/**/rollout-*.jsonl
+```
 
-## What Token Forest never reads
+From these logs it uses: token counts (input / output / cache read / cache write), timestamps, source (Claude or Codex), model identifiers, session identifiers, project-directory names, Git branch names, AI-generated session titles, and message-type structure (used only to tell genuine user turns apart from tool results).
 
-- ❌ Your source code
-- ❌ Your prompts or the AI's responses
-- ❌ Your files, projects, or anything else on disk
+To parse a log line, its full content — which can include prompt text — passes through memory. Token Forest does not need prompt meaning, does not copy prompt or conversation text into its own data files, and never uploads it. It never opens your source-code files.
 
-The growth logic needs a number, not your novel. It only ever gets the number.
+## What the app stores locally
 
-## What Token Forest stores
+The current beta stores its data files next to the application. A future release will move them to standard per-user directories (Windows: `%LOCALAPPDATA%\TokenForest\`, macOS: `~/Library/Application Support/TokenForest/`) with automatic migration.
 
-A few small local files next to the app: your tree's growth state, your settings (window position, language, etc.), and aggregated daily usage totals. All local. Delete them and the app starts fresh.
-
-## Network access
-
-**None, by default.** No telemetry, no analytics, no update pings, no price lookups (cost estimates use a built-in offline price table).
-
-The **only** network feature is the **leaderboard**, and it is strictly opt-in:
-
-| | |
+| File | Contents |
 | --- | --- |
-| What's submitted | your chosen nickname, region, current species, tree token total, growth stage |
-| How you're identified | an anonymous account — no email, no name, no machine info |
-| Opting out | turning the leaderboard off **deletes your entry** from the server |
+| `garden.json` | Per-tree tokens, growth stage, fruit, decorations, first-use time |
+| `config.json` | Window position, language, bubble mode, leaderboard state, display name, region |
+| `growth_ledger.json` | Growth history by date × tree × token type |
+| `usage_ledger.json` | Aggregated session metadata: log file paths, project names, branches, AI titles, times, models, daily token totals |
+| `account.json` | Only if the leaderboard was enabled: anonymous user ID and Supabase session tokens |
+
+These files stay on your machine and are never uploaded. `usage_ledger.json` contains local metadata (such as file paths) that other users of your computer could read if they can read your files; treat the app's data folder as private. `account.json` currently stores session tokens as plain JSON; moving them to the operating system's credential store is planned. Deleting these files (or uninstalling and deleting the folder) removes all local data.
+
+## Network behaviour
+
+With the leaderboard off — the default — Token Forest makes **no network requests at all**. Growth, bubbles, the shop, capsule mode and the dashboard all work offline. Cost estimates use a bundled price table; nothing is looked up online.
+
+Menu items that open a web page (for example the leaderboard website) launch your default browser; the desktop app itself sends nothing in the background.
+
+## Optional leaderboard
+
+The leaderboard is off by default. Selecting **On** shows a consent dialog listing exactly what will sync; nothing is sent unless you confirm it.
+
+When enabled, the app creates an anonymous account with Supabase (our database provider) and syncs, roughly every 30 minutes and at moments like startup, tree switch, and quitting:
+
+| Field | Shown publicly? |
+| --- | --- |
+| Random anonymous ID (generated by Supabase; used only to own your row) | No |
+| Display name (blank = a generated "Anonymous#id" name) | Yes |
+| Total collected tree tokens | Yes |
+| Each tree's token total and growth stage | Yes (tree details) |
+| Region — only if you picked one | Yes (flag) |
+| Current tree species | Yes |
+| Server-generated created/updated timestamps | May be shown |
+
+Small print: if you leave the name blank, the generated anonymous name is rendered in your app language, so the leaderboard indirectly reflects which UI language you use.
+
+**Never uploaded, in any mode:** raw logs, prompts or conversation content, source code, session titles, file paths, project names, Git branches, per-model or per-session usage, cost estimates.
+
+Like any online service, Supabase's infrastructure processes standard connection data (such as IP addresses and request timestamps) to operate and secure the service, under Supabase's own policies.
+
+### On · Paused · Off
+
+- **On** — syncs periodically.
+- **Paused** — stops updates; your last entry stays on the board.
+- **Off** — stops syncing and sends a request to delete your row.
+
+Beta limitation, stated plainly: if the deletion request fails (for example, you are offline), the current beta does not yet retry or confirm it. Toggling Off again while online re-sends it. Reliable delete-with-confirmation is planned before the stable release. You can also ask us to delete your entry (see Contact) — mention the anonymous name/ID shown in the app, and never send us your tokens from `account.json`.
+
+## Website
+
+The official website ([tokenforest.com.au](https://www.tokenforest.com.au)) uses **no analytics, no advertising trackers, and no marketing cookies**. Its hosting provider processes standard server logs (IP address, user agent, requested page, time) to serve and secure the site. The leaderboard page reads the public leaderboard rows described above; viewing it requires no login. If we ever add analytics or similar services, this notice will be updated first.
+
+## Service providers
+
+We use a small number of providers, only for the functions described: Supabase (anonymous auth + leaderboard database), the website host, and GitHub (this repository, issues, release downloads). Provider regions and policy links will be finalised in this section before the first stable release.
 
 ## Verifying these claims
 
-We take "trust us" seriously enough to know it isn't good enough. The source code is currently private, but we're exploring opening the core usage-reader component so these claims can be independently audited. Until then: the app works with your network disabled — try it.
+We take "trust us" seriously enough to know it isn't good enough. The app works with your network fully disabled — try it. Each release publishes SHA-256 checksums and its signing status, and release notes call out any privacy or network change. The source code is currently private, but we are exploring opening the core usage-reader component so the "reads logs, uploads nothing" claims can be independently audited.
 
-## Questions?
+## Your controls
 
-Write to [contact@tokenforest.com.au](mailto:contact@tokenforest.com.au) — privacy questions get answered first.
+- Use the app fully offline — never enable the leaderboard.
+- Pause or turn off leaderboard sync at any time from the tree's menu.
+- Change or blank your display name and region.
+- Delete local data by deleting the app's data files / uninstalling.
+- Contact us to verify remote deletion.
+
+## Changes
+
+If a future version adds any new data processing — telemetry, crash reporting, auto-update checks, new leaderboard fields — this notice and the in-app consent will be updated **before** that version ships, and the release notes will call it out under "Privacy or network changes".
+
+## Contact
+
+```text
+Publisher: Poietic Studio
+Privacy:   contact@tokenforest.com.au (interim; privacy@tokenforest.com.au activating before first public release)
+Security:  see SECURITY.md
+Website:   https://www.tokenforest.com.au
+```
+
+Privacy questions get answered first.
