@@ -141,11 +141,11 @@ More in the full [FAQ](docs/FAQ.md).
 
 Token Forest is built by a small team that spends *way* too many tokens — which is how we know the tree grows.
 
-| | Name | GitHub |
-| --- | --- | --- |
-| <img src="https://github.com/Ericcccccc777.png" width="48" /> | **Eric Cheng** | [@Ericcccccc777](https://github.com/Ericcccccc777) |
-| <img src="https://github.com/YimingRen111.png" width="48" /> | **Yiming (Miles) Ren** | [@YimingRen111](https://github.com/YimingRen111) |
-| <img src="https://github.com/EthanMa727.png" width="48" /> | **Ethan** | [@EthanMa727](https://github.com/EthanMa727) |
+| | Name | GitHub | Email |
+| --- | --- | --- | --- |
+| <img src="https://github.com/Ericcccccc777.png" width="48" /> | **Eric Cheng** | [@Ericcccccc777](https://github.com/Ericcccccc777) | — |
+| <img src="https://github.com/YimingRen111.png" width="48" /> | **Yiming (Miles) Ren** | [@YimingRen111](https://github.com/YimingRen111) | — |
+| <img src="https://github.com/EthanMa727.png" width="48" /> | **Ethan Ma** | [@EthanMa727](https://github.com/EthanMa727) | [ethan727@proton.me](mailto:ethan727@proton.me) |
 
 ---
 
