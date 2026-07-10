@@ -68,7 +68,7 @@ Feeling competitive? Opt in to the [global leaderboard](https://www.tokenforest.
 
 <img src="assets/leaderboard.png" alt="The global leaderboard, ranking players by the tokens they've grown into their trees" width="100%" />
 
-### 📊 Dashboard — feature-complete, shipping next
+### 📊 Dashboard — live in the app
 
 A report card for your forest: days planted, lifetime tokens, a growth curve over time, per-model breakdowns for Claude and Codex, a 26-week activity heatmap, per-project splits, and one honest line per conversation — with a cost estimate computed **offline** from a built-in price table (four token classes priced separately, cache reads at 0.1×).
 
@@ -133,8 +133,8 @@ The short version — see the full [roadmap](docs/ROADMAP.md) for details.
 
 | | |
 | --- | --- |
-| ✅ Shipped | Live token tracking (Claude Code + Codex) · 8-stage growth · **4 species (incl. 🎄 Christmas Tree)** with decorations · fruit & shop · bubbles · capsule mode · opt-in leaderboard · Windows & macOS · English / 中文 / 日本語 / 한국어 |
-| 🚧 In progress | Stats dashboard (feature-complete) · one-click installers · **🌲 the next species** |
+| ✅ Shipped | Live token tracking (Claude Code + Codex) · 8-stage growth · **4 species (incl. 🎄 Christmas Tree)** with decorations · fruit & shop · bubbles · capsule mode · **stats dashboard** · opt-in leaderboard · Windows & macOS · English / 中文 / 日本語 / 한국어 |
+| 🚧 In progress | One-click installers · **🌲 the next species** |
 | 🔭 Next | Seasons & day/night · offline catch-up growth · achievements & streaks · more species, decorations and supported AI tools |
 
 ---
