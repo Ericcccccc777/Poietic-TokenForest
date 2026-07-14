@@ -50,7 +50,7 @@ Switch to **capsule mode** — a tiny status pill in the corner — or toggle al
 ## Leaderboard
 
 ### What does the leaderboard upload?
-Exactly what its consent dialog lists: an anonymous ID, nickname, region, current species, and each tree's token total and growth stage — nothing else. See the [Privacy Notice](PRIVACY.md).
+Exactly what its consent dialog lists — nothing more. The full field table lives in the [Privacy Notice](PRIVACY.md), including the four anti-cheat aggregates added in v0.1.5 and why the per-window timeline is never uploaded.
 
 ### How do I get off the leaderboard?
 Turn it off in the app. It asks the server to delete your entry — removed from the board, not just hidden.

@@ -64,7 +64,7 @@ Big tree covering your work? Switch to a Dynamic-Island-style capsule: a tiny pi
 
 ### 🏆 Global leaderboard (opt-in)
 
-Feeling competitive? Opt in to the [global leaderboard](https://www.tokenforest.com.au) and see how your forest ranks worldwide — every player's own tree, flagged by region, lined up side by side and ranked by the tokens they've grown. Strictly opt-in: the in-app consent dialog lists exactly what's synced — an anonymous ID, your nickname, region, and per-tree totals & growth stages — and opting out removes your entry from the board.
+Feeling competitive? Opt in to the [global leaderboard](https://www.tokenforest.com.au) and see how your forest ranks worldwide — every player's own tree, flagged by region, lined up side by side and ranked by the tokens they've grown. Strictly opt-in: the in-app consent dialog lists exactly what's synced, and opting out removes your entry from the board.
 
 <img src="assets/leaderboard.png" alt="The global leaderboard, ranking players by the tokens they've grown into their trees" width="100%" />
 
@@ -90,7 +90,7 @@ Token Forest is built on one rule: **what happens on your machine stays on your 
 | Read the token **counts** from usage logs that Claude Code / Codex already keep locally | Open your code files — or store or upload prompts / conversation content |
 | Compute growth, stats and costs entirely on-device | Send telemetry or analytics anywhere |
 | Store its state in small local files | Talk to the network at all — unless you opt in to the leaderboard |
-| (Leaderboard, opt-in only) sync the fields its consent dialog lists: anonymous ID, nickname, region, per-tree totals & stages | Upload anything else, ever |
+| (Leaderboard, opt-in only) sync exactly the fields its consent dialog lists — nothing more | Upload anything else, ever |
 
 Read the full [privacy notes](docs/PRIVACY.md).
 

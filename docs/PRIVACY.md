@@ -2,7 +2,7 @@
 
 [English](PRIVACY.md) · [简体中文](PRIVACY.zh-CN.md)
 
-**Version 1.0-beta (pre-release draft) · Last updated 2026-07-08 · Effective at first public release**
+**Version 1.0-beta (pre-release draft) · Last updated 2026-07-14 · Effective at first public release**
 **Publisher: Poietic Studio**
 
 Token Forest is a desktop companion that turns your Claude Code / OpenAI Codex usage into a growing pixel tree. This notice describes exactly what the app reads, stores, and — only if you opt in — uploads. The same text is published at [tokenforest.com.au/privacy](https://www.tokenforest.com.au/privacy); this file's git history is the public change log of the policy.
@@ -63,11 +63,28 @@ When enabled, the app creates an anonymous account with Supabase (our database p
 | Each tree's token total and growth stage | Yes (tree details) |
 | Region — only if you picked one | Yes (flag) |
 | Current tree species | Yes |
+| App version | No |
+| Anti-cheat summary — four numbers, see below (v0.1.5+) | No |
 | Server-generated created/updated timestamps | May be shown |
 
 Small print: if you leave the name blank, the generated anonymous name is rendered in your app language, so the leaderboard indirectly reflects which UI language you use.
 
-**Never uploaded, in any mode:** raw logs, prompts or conversation content, source code, session titles, file paths, project names, Git branches, per-model or per-session usage, cost estimates.
+### The anti-cheat summary (v0.1.5+)
+
+A leaderboard score is a number your own machine computes, so on its own it proves nothing — and it cuts both ways. Someone can inflate it by editing a local file, while an honest heavy user who lets bubbles pile up all day and collects them at once produces a jump that looks identical to that. To tell the two apart, each sync that raises your score carries four aggregate numbers describing how the increase was earned:
+
+- how many **5-minute windows** the new tokens are spread across,
+- how many tokens are in the **busiest single window**,
+- their **sum**, and
+- the **time span** from the earliest window to the latest.
+
+The windows are keyed on the timestamps in the Claude Code / Codex logs themselves — when the tokens were actually spent — so a hoarded workday correctly reads as many ordinary windows rather than one impossible spike.
+
+**We deliberately do not upload the per-window timeline.** A 5-minute-resolution record of your token use would amount to a log of when you work and when you sleep. The four aggregates cannot reconstruct that: they say *how big* the busiest window was, never *which* window it was. The precise per-window figures are computed on your machine, used to derive the four numbers, and never leave it.
+
+These four numbers are **not shown on the public leaderboard** — the database revokes read access to those columns for the public read-only role. They are readable only by an administrator reviewing a specific account, and they are advisory: they inform a human decision, they do not automatically punish anyone. If the app cannot vouch for its own figures (for example, it was upgraded mid-stream, or it was closed between collecting a bubble and syncing), it sends nothing rather than send something wrong.
+
+**Never uploaded, in any mode:** raw logs, prompts or conversation content, source code, session titles, file paths, project names, Git branches, per-model or per-session usage, cost estimates, or any per-window / time-of-day breakdown of your token use.
 
 Like any online service, Supabase's infrastructure processes standard connection data (such as IP addresses and request timestamps) to operate and secure the service, under Supabase's own policies.
 
