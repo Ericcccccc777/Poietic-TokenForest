@@ -2,7 +2,7 @@
 
 [English](PRIVACY.md) · [简体中文](PRIVACY.zh-CN.md)
 
-**Version 1.0-beta (pre-release draft) · Last updated 2026-07-14 · Effective at first public release**
+**Version 1.0-beta (pre-release draft) · Last updated 2026-07-19 · Effective at first public release**
 **Publisher: Poietic Studio**
 
 Token Forest is a desktop companion that turns your Claude Code / OpenAI Codex usage into a growing pixel tree. This notice describes exactly what the app reads, stores, and — only if you opt in — uploads. The same text is published at [tokenforest.com.au/privacy](https://www.tokenforest.com.au/privacy); this file's git history is the public change log of the policy.
@@ -40,12 +40,18 @@ The current beta stores its data files next to the application. A future release
 | `growth_ledger.json` | Growth history by date × tree × token type |
 | `usage_ledger.json` | Aggregated session metadata: log file paths, project names, branches, AI titles, times, models, daily token totals |
 | `account.json` | Only if the leaderboard was enabled: anonymous user ID and Supabase session tokens |
+| `sync_error.json` | Only if the leaderboard was enabled: the last leaderboard-sync error message and its timestamp (diagnostic only; never uploaded) |
 
 These files stay on your machine and are never uploaded. `usage_ledger.json` contains local metadata (such as file paths) that other users of your computer could read if they can read your files; treat the app's data folder as private. `account.json` currently stores session tokens as plain JSON; moving them to the operating system's credential store is planned. Deleting these files (or uninstalling and deleting the folder) removes all local data.
 
 ## Network behaviour
 
-With the leaderboard off — the default — Token Forest makes **no network requests at all**. Growth, bubbles, the shop, capsule mode and the dashboard all work offline. Cost estimates use a bundled price table; nothing is looked up online.
+By default Token Forest makes **no network requests at all**. Growth, bubbles, the shop, capsule mode and the dashboard all work offline. Cost estimates use a bundled price table.
+
+Exactly two optional features can go online, and neither does anything until you act:
+
+- **Leaderboard** — off by default; see the next section.
+- **Price-table update** (v0.1.4+) — clicking **"↻ Update prices"** in the dashboard, or turning on **"Auto-update prices"** in Settings (off by default; when on, at most one check per day), downloads a single static file, `https://tokenforest.com.au/pricing.json`, so newly released models can be priced without waiting for an app update. This is a **download only**: the request carries no usage data, no identifiers and no account. The file is validated and cached locally; on any failure the app silently keeps using the bundled/cached table.
 
 Menu items that open a web page (for example the leaderboard website) launch your default browser; the desktop app itself sends nothing in the background.
 
@@ -64,6 +70,7 @@ When enabled, the app creates an anonymous account with Supabase (our database p
 | Region — only if you picked one | Yes (flag) |
 | Current tree species | Yes |
 | App version | No |
+| Previous anonymous ID — only after a session reset re-registers you; links your new row to the one it replaced so the stale one can be retired (v0.1.6+) | No |
 | Anti-cheat summary — four numbers, see below (v0.1.5+) | No |
 | Server-generated created/updated timestamps | May be shown |
 
@@ -99,6 +106,8 @@ Beta limitation, stated plainly: if the deletion request fails (for example, you
 ## Website
 
 The official website ([tokenforest.com.au](https://www.tokenforest.com.au)) uses **no analytics, no advertising trackers, and no marketing cookies**. Its hosting provider processes standard server logs (IP address, user agent, requested page, time) to serve and secure the site. The leaderboard page reads the public leaderboard rows described above; viewing it requires no login. If we ever add analytics or similar services, this notice will be updated first.
+
+The home page shows a demo video hosted on YouTube. Nothing is fetched from YouTube until you press play: at rest the page shows only a still image served from this site. Once you press play, the video loads from YouTube's no-cookie player domain, and from that point YouTube may set its own cookies and receive your IP address under Google's privacy policy. You can avoid it entirely by not playing the video.
 
 ## Service providers
 
