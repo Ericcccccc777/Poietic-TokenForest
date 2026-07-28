@@ -2,7 +2,7 @@
 
 [English](PRIVACY.md) · [简体中文](PRIVACY.zh-CN.md)
 
-**Version 1.0-beta (pre-release draft) · Last updated 2026-07-19 · Effective at first public release**
+**Version 1.0-beta (pre-release draft) · Last updated 2026-07-28 · Effective at first public release**
 **Publisher: Poietic Studio**
 
 Token Forest is a desktop companion that turns your Claude Code / OpenAI Codex usage into a growing pixel tree. This notice describes exactly what the app reads, stores, and — only if you opt in — uploads. The same text is published at [tokenforest.com.au/privacy](https://www.tokenforest.com.au/privacy); this file's git history is the public change log of the policy.
@@ -35,7 +35,7 @@ The current beta stores its data files next to the application. A future release
 
 | File | Contents |
 | --- | --- |
-| `garden.json` | Per-tree tokens, growth stage, fruit, decorations, first-use time |
+| `garden.json` | Per-tree tokens, growth stage, fruit, decorations, first-use time; plus the running per-model totals of the tokens you collected (model name + the four counts, no dates) |
 | `config.json` | Window position, language, bubble mode, leaderboard state, display name, region |
 | `growth_ledger.json` | Growth history by date × tree × token type |
 | `usage_ledger.json` | Aggregated session metadata: log file paths, project names, branches, AI titles, times, models, daily token totals |
@@ -72,6 +72,7 @@ When enabled, the app creates an anonymous account with Supabase (our database p
 | App version | No |
 | Previous anonymous ID — only after a session reset re-registers you; links your new row to the one it replaced so the stale one can be retired (v0.1.6+) | No |
 | Anti-cheat summary — four numbers, see below (v0.1.5+) | No |
+| Model breakdown of the tokens you collected — model name, its vendor, the input / output / cache-read / cache-write counts and their sum, with no dates attached (v0.1.10+) | Yes (model boards) |
 | Server-generated created/updated timestamps | May be shown |
 
 Small print: if you leave the name blank, the generated anonymous name is rendered in your app language, so the leaderboard indirectly reflects which UI language you use.
@@ -91,7 +92,21 @@ The windows are keyed on the timestamps in the Claude Code / Codex logs themselv
 
 These four numbers are **not shown on the public leaderboard** — the database revokes read access to those columns for the public read-only role. They are readable only by an administrator reviewing a specific account, and they are advisory: they inform a human decision, they do not automatically punish anyone. If the app cannot vouch for its own figures (for example, it was upgraded mid-stream, or it was closed between collecting a bubble and syncing), it sends nothing rather than send something wrong.
 
-**Never uploaded, in any mode:** raw logs, prompts or conversation content, source code, session titles, file paths, project names, Git branches, per-model or per-session usage, cost estimates, or any per-window / time-of-day breakdown of your token use.
+### The model breakdown (v0.1.10+)
+
+The leaderboard has boards beyond "biggest tree" — most-used model, one vendor against another. They are fed by a per-model breakdown of your tokens: the model name (say `claude-opus-4-8`), the vendor it belongs to, and the four token counts plus their sum.
+
+**It covers only the bubbles you popped yourself.** Every bubble carries the breakdown of which models burned it, and that breakdown is banked at the exact moment you collect the bubble — the same instant, the same energy, that raises your tree score. A bubble that expires unpopped counts for neither. Token Forest does not go digging through logs from before you installed it in order to build this.
+
+The vendor is derived from the **model name**, not from which CLI wrote the log: people routinely route DeepSeek, GLM or Kimi through Claude Code via `ANTHROPIC_BASE_URL`, and attributing by source would file those under Claude.
+
+**It carries no dates.** Running totals only — no per-day, per-hour or per-session split — so like the four anti-cheat numbers it cannot reconstruct when you work and when you rest. The per-date breakdown stays on your machine, for the dashboard.
+
+Tracking begins with v0.1.10. Tokens collected before it have no model attribution and are not backfilled, so the model total is normally lower than your score.
+
+A sync carries at most 30 models (a real user typically has 5–15); anything beyond that is dropped by token count. Model names pass two checks: the app folds anything outside a strict character set into a single `unknown` entry — usage is not lost, but no arbitrary string reaches a public page — and the server independently re-checks the character set and a banned-word list, dropping rows that fail.
+
+**Never uploaded, in any mode:** raw logs, prompts or conversation content, source code, session titles, file paths, project names, Git branches, per-session usage, cost estimates, anything about tokens you never collected, or any per-window / time-of-day breakdown of your token use — including any per-date breakdown of the model figures above.
 
 Like any online service, Supabase's infrastructure processes standard connection data (such as IP addresses and request timestamps) to operate and secure the service, under Supabase's own policies.
 
