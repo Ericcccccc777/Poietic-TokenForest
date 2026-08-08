@@ -42,7 +42,7 @@ The current beta stores its data files next to the application. A future release
 | `account.json` | Only if the leaderboard was enabled: anonymous user ID and Supabase session tokens |
 | `sync_error.json` | Only if the leaderboard was enabled: the last leaderboard-sync error message and its timestamp (diagnostic only; never uploaded) |
 
-These files stay on your machine and are never uploaded. `usage_ledger.json` contains local metadata (such as file paths) that other users of your computer could read if they can read your files; treat the app's data folder as private. `account.json` currently stores session tokens as plain JSON; moving them to the operating system's credential store is planned. Deleting these files (or uninstalling and deleting the folder) removes all local data.
+These files stay on your machine and are never uploaded. `usage_ledger.json` contains local metadata (such as file paths) that other users of your computer could read if they can read your files; treat the app's data folder as private. From v0.2.0 the session tokens live in the operating system's credential store — Keychain on macOS, Credential Manager on Windows. A copy stays in `account.json` so that an older build, which does not know about the credential store, still finds your account instead of registering a new one and stranding your leaderboard row. Deleting these files (or uninstalling and deleting the folder) removes all local data.
 
 ## Network behaviour
 
@@ -72,10 +72,19 @@ When enabled, the app creates an anonymous account with Supabase (our database p
 | App version | No |
 | Previous anonymous ID — only after a session reset re-registers you; links your new row to the one it replaced so the stale one can be retired (v0.1.6+) | No |
 | Anti-cheat summary — four numbers, see below (v0.1.5+) | No |
-| Model breakdown of the tokens you collected — model name, its vendor, the input / output / cache-read / cache-write counts and their sum, with no dates attached (v0.1.10+) | Yes (model boards) |
+| Model breakdown of the tokens you collected — model name, its vendor, the input / output / cache-read / cache-write counts and their sum, with no dates attached (v0.2.0+) | Yes (model boards) |
 | Server-generated created/updated timestamps | May be shown |
 
 Small print: if you leave the name blank, the generated anonymous name is rendered in your app language, so the leaderboard indirectly reflects which UI language you use.
+
+### What the model breakdown is used for (v0.2.0+)
+
+Two public boards are built from it, besides the token board:
+
+- **Vendor usage** — every player's tokens for a given vendor, and for a given model, added together. These are whole-community totals; one player's usage cannot be read back out of them.
+- **Forest value** — an estimate of what your collected tokens would have cost, shown next to your name.
+
+The value figure is worked out on our server by multiplying the token counts you already sync by each model's published price. **No money figure is ever sent from your machine**, and no new field is uploaded for it. It is an estimate and not a bill: subscriptions, discounts and free allowances are ignored, a vendor price change moves everybody at once, and the model each token is filed under comes from your own machine and is not independently verified. Both boards state how much of all counted tokens they actually cover, because the model data only starts from the release that introduced it.
 
 ### The anti-cheat summary (v0.1.5+)
 
@@ -92,7 +101,7 @@ The windows are keyed on the timestamps in the Claude Code / Codex logs themselv
 
 These four numbers are **not shown on the public leaderboard** — the database revokes read access to those columns for the public read-only role. They are readable only by an administrator reviewing a specific account, and they are advisory: they inform a human decision, they do not automatically punish anyone. If the app cannot vouch for its own figures (for example, it was upgraded mid-stream, or it was closed between collecting a bubble and syncing), it sends nothing rather than send something wrong.
 
-### The model breakdown (v0.1.10+)
+### The model breakdown (v0.2.0+)
 
 The leaderboard has boards beyond "biggest tree" — most-used model, one vendor against another. They are fed by a per-model breakdown of your tokens: the model name (say `claude-opus-4-8`), the vendor it belongs to, and the four token counts plus their sum.
 
@@ -102,7 +111,7 @@ The vendor is derived from the **model name**, not from which CLI wrote the log:
 
 **It carries no dates.** Running totals only — no per-day, per-hour or per-session split — so like the four anti-cheat numbers it cannot reconstruct when you work and when you rest. The per-date breakdown stays on your machine, for the dashboard.
 
-Tracking begins with v0.1.10. Tokens collected before it have no model attribution and are not backfilled, so the model total is normally lower than your score.
+Tracking begins with v0.2.0. Tokens collected before it have no model attribution and are not backfilled, so the model total is normally lower than your score.
 
 A sync carries at most 30 models (a real user typically has 5–15); anything beyond that is dropped by token count. Model names pass two checks: the app folds anything outside a strict character set into a single `unknown` entry — usage is not lost, but no arbitrary string reaches a public page — and the server independently re-checks the character set and a banned-word list, dropping rows that fail.
 
