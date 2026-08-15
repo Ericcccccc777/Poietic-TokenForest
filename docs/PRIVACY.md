@@ -78,6 +78,7 @@ When enabled, the app creates an anonymous account with Supabase (our database p
 | Previous anonymous ID — only after a session reset re-registers you; links your new row to the one it replaced so the stale one can be retired (v0.1.6+) | No |
 | Anti-cheat summary — four numbers, see below (v0.1.5+) | No |
 | Model breakdown of the tokens you collected — model name, its vendor, the input / output / cache-read / cache-write counts and their sum, with no dates attached (v0.2.0+) | Yes (model boards) |
+| **Project showcase** — a project name, a one-line description, a link and one image, all written by you (v0.2.2+). Off by default, inside the leaderboard settings; see the “Project showcase” section below | Yes |
 | Server-generated created/updated timestamps | May be shown |
 
 Small print: if you leave the name blank, the generated anonymous name is rendered in your app language, so the leaderboard indirectly reflects which UI language you use.
@@ -141,6 +142,26 @@ The home page shows a demo video hosted on YouTube. Nothing is fetched from YouT
 ## Service providers
 
 We use a small number of providers, only for the functions described: Supabase (anonymous auth + leaderboard database), the website host, and GitHub (this repository, issues, release downloads). Provider regions and policy links will be finalised in this section before the first stable release.
+
+## Project showcase (v0.2.2+, off by default)
+
+Inside the leaderboard settings there is a switch called **Project showcase**. Turn it on and
+you can add a project name (up to 24 characters), a one-line description (up to 80), a link,
+and one image. Those four things are synced along with your leaderboard entry and shown
+publicly next to it. A few things worth stating plainly:
+
+- **It is off by default, and it does nothing while the leaderboard itself is off.** While the
+  switch is off, none of these four fields is sent at all.
+- **You write it, so it appears exactly as written.** Do not put anything there you would not
+  want public.
+- **The image is re-encoded on your machine before it is uploaded** — resized to at most
+  512 pixels on its longest side and 64 KB, and stripped of location and camera metadata in the
+  process. If you pick a photo from your phone, its GPS coordinates do not go with it.
+- **Turning the switch off takes it down.** The next sync clears those fields on the leaderboard
+  and deletes the uploaded image; turning the leaderboard off entirely deletes them along with
+  your whole entry. It is not merely hidden on your side.
+- **Links must start with https://** and are checked before they are accepted. The text goes
+  through the same word filter as display names, on your machine and again on the server.
 
 ## Verifying these claims
 
