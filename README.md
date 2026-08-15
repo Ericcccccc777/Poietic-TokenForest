@@ -103,7 +103,7 @@ Token Forest is built on one rule: **what happens on your machine stays on your 
 | --- | --- |
 | Read the token **counts** from usage logs that Claude Code / Codex already keep locally | Open your code files — or store or upload prompts / conversation content |
 | Compute growth, stats and costs entirely on-device | Send telemetry or analytics anywhere |
-| Store its state in small local files | Talk to the network at all — unless you opt in to the leaderboard |
+| Store its state in small local files | Talk to the network at all — unless you turn on the leaderboard, the price-table update or the update check (all off by default) |
 | (Leaderboard, opt-in only) sync exactly the fields its consent dialog lists — nothing more | Upload anything else, ever |
 
 Read the full [privacy notes](docs/PRIVACY.md).
@@ -161,7 +161,7 @@ No. It reads local usage logs and uses only their metadata — token counts, mod
 
 **Does it need the internet?**
 
-No. Everything works fully offline. The only optional network feature is the leaderboard, which is off until you turn it on.
+No. Everything works fully offline. The optional features that can go online are the leaderboard, the price-table update and the update check — each is off until you turn it on, and only the leaderboard ever uploads anything. See the [Privacy Notice](docs/PRIVACY.md#network-behaviour) for exactly what each one sends.
 
 **Why is my token number so big?**
 

@@ -22,7 +22,7 @@ Claude Code and Codex today. More assistants are under consideration — [tell u
 **No.** It reads the usage logs those tools already keep locally and uses only their metadata — token counts, model names, timestamps, session titles. It never opens your code files, and never stores or uploads prompts or conversations. Full details in the [Privacy Notice](PRIVACY.md).
 
 ### Does it need the internet?
-No. Everything works fully offline. The single optional network feature is the leaderboard, which is off until you enable it — and leaving it deletes your entry.
+No. Everything works fully offline. The optional features that can go online are the leaderboard, the price-table update and the update check — each is off until you enable it, and only the leaderboard uploads anything (leaving it deletes your entry). See the [Privacy Notice](PRIVACY.md#network-behaviour) for what each one sends.
 
 ### Is the source code available?
 The app is developed in a private repository and isn't open source at this time. We're exploring opening core components (like the usage reader) so the privacy claims can be independently verified.

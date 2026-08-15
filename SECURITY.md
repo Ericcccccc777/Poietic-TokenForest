@@ -35,7 +35,7 @@ Do **not** include in any report: your Claude/Codex logs, prompts or conversatio
 We especially welcome reports of:
 
 - any upload of local logs, prompts, conversation content or source-code files;
-- **any network request while the leaderboard is off** (the app promises zero);
+- **any network request that no optional feature you turned on can account for** — with the leaderboard, the price-table update and the update check all off, the app promises zero; with one of them on, anything beyond what the Privacy Notice describes for that feature (different host, extra data, higher frequency) is in scope;
 - a mismatch between the consent dialog / Privacy Notice and what is actually sent;
 - leaderboard authentication or row-level-security bypass (reading or modifying another user's row);
 - exposure of access/refresh tokens;
