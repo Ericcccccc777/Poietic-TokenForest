@@ -2,7 +2,7 @@
 
 [English](SECURITY.md) · [简体中文](SECURITY.zh-CN.md)
 
-**Last updated 2026-07-08 · Publisher: Poietic Studio**
+**Last updated 2026-08-16 · Publisher: Poietic Studio**
 
 Token Forest is a proprietary, local-first desktop app with no network access by default. We take reports about its security and privacy behaviour seriously — especially anything that contradicts our published [Privacy Notice](docs/PRIVACY.md).
 
@@ -15,7 +15,7 @@ Only the latest public release receives security fixes unless a release note sta
 Please report suspected vulnerabilities **privately** — do **not** open a public issue for an unpatched problem:
 
 1. **Preferred:** this repository's *Security* tab → *Report a vulnerability* (GitHub private vulnerability reporting).
-2. Email: [contact@tokenforest.com.au](mailto:contact@tokenforest.com.au) — subject line starting with `[SECURITY]`. (A dedicated `security@tokenforest.com.au` inbox is activating before the first public release.)
+2. Email: [contact@tokenforest.com.au](mailto:contact@tokenforest.com.au) — subject line starting with `[SECURITY]`. (A dedicated `security@tokenforest.com.au` inbox is being set up.)
 
 Ordinary bugs and feature requests are welcome in the public issue tracker.
 
@@ -38,6 +38,9 @@ We especially welcome reports of:
 - **any network request that no optional feature you turned on can account for** — with the leaderboard, the price-table update and the update check all off, the app promises zero; with one of them on, anything beyond what the Privacy Notice describes for that feature (different host, extra data, higher frequency) is in scope;
 - a mismatch between the consent dialog / Privacy Notice and what is actually sent;
 - leaderboard authentication or row-level-security bypass (reading or modifying another user's row);
+- publishing project-showcase content that bypasses the checks the Privacy Notice describes — a link that is not `https://`, a name or description that evades the word screening, or an image served from anywhere other than our own storage;
+- reading, replacing or deleting another player's project image, or enumerating stored objects beyond what the public board displays;
+- a project showcase that stays published after the player switched it off, left the leaderboard, or was removed from the board;
 - exposure of access/refresh tokens;
 - local storage readable across OS user boundaries;
 - arbitrary code execution, unsafe archive/update handling, DLL or library hijacking;
@@ -69,6 +72,6 @@ Requests to delete a leaderboard entry or questions about data handling are not 
 
 ## Release authenticity
 
-Official downloads come only from [the official website](https://www.tokenforest.com.au) and this repository's Releases, each with a SHA-256 checksum and a stated signing status. A step-by-step verification guide ships with the first release. Do not run a download that fails verification — delete it, re-download from an official channel, and report it if the mismatch persists.
+Official downloads come only from [the official website](https://www.tokenforest.com.au) and this repository's Releases, each with a SHA-256 checksum and a stated signing status — except four early builds: v0.1.0, v0.1.1 and v0.1.2 published no checksum, and v0.1.9 neither a checksum nor a signing status. Do not run a download that fails verification — delete it, re-download from an official channel, and report it if the mismatch persists.
 
 Thank you for helping keep the forest safe. 🌳
