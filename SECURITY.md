@@ -15,7 +15,7 @@ Only the latest public release receives security fixes unless a release note sta
 Please report suspected vulnerabilities **privately** — do **not** open a public issue for an unpatched problem:
 
 1. **Preferred:** this repository's *Security* tab → *Report a vulnerability* (GitHub private vulnerability reporting).
-2. Email: [contact@tokenforest.com.au](mailto:contact@tokenforest.com.au) — subject line starting with `[SECURITY]`. (A dedicated `security@tokenforest.com.au` inbox is activating before the first public release.)
+2. Email: [contact@tokenforest.com.au](mailto:contact@tokenforest.com.au) — subject line starting with `[SECURITY]`. (A dedicated `security@tokenforest.com.au` inbox is being set up.)
 
 Ordinary bugs and feature requests are welcome in the public issue tracker.
 
@@ -72,6 +72,6 @@ Requests to delete a leaderboard entry or questions about data handling are not 
 
 ## Release authenticity
 
-Official downloads come only from [the official website](https://www.tokenforest.com.au) and this repository's Releases, each with a SHA-256 checksum and a stated signing status. A step-by-step verification guide ships with the first release. Do not run a download that fails verification — delete it, re-download from an official channel, and report it if the mismatch persists.
+Official downloads come only from [the official website](https://www.tokenforest.com.au) and this repository's Releases, each with a SHA-256 checksum and a stated signing status — except four early builds: v0.1.0, v0.1.1 and v0.1.2 published no checksum, and v0.1.9 neither a checksum nor a signing status. Do not run a download that fails verification — delete it, re-download from an official channel, and report it if the mismatch persists.
 
 Thank you for helping keep the forest safe. 🌳
