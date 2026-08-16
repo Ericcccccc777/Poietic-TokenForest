@@ -2,7 +2,7 @@
 
 [English](SECURITY.md) · [简体中文](SECURITY.zh-CN.md)
 
-**Last updated 2026-07-08 · Publisher: Poietic Studio**
+**Last updated 2026-08-16 · Publisher: Poietic Studio**
 
 Token Forest is a proprietary, local-first desktop app with no network access by default. We take reports about its security and privacy behaviour seriously — especially anything that contradicts our published [Privacy Notice](docs/PRIVACY.md).
 
@@ -38,6 +38,9 @@ We especially welcome reports of:
 - **any network request that no optional feature you turned on can account for** — with the leaderboard, the price-table update and the update check all off, the app promises zero; with one of them on, anything beyond what the Privacy Notice describes for that feature (different host, extra data, higher frequency) is in scope;
 - a mismatch between the consent dialog / Privacy Notice and what is actually sent;
 - leaderboard authentication or row-level-security bypass (reading or modifying another user's row);
+- publishing project-showcase content that bypasses the checks the Privacy Notice describes — a link that is not `https://`, a name or description that evades the word screening, or an image served from anywhere other than our own storage;
+- reading, replacing or deleting another player's project image, or enumerating stored objects beyond what the public board displays;
+- a project showcase that stays published after the player switched it off, left the leaderboard, or was removed from the board;
 - exposure of access/refresh tokens;
 - local storage readable across OS user boundaries;
 - arbitrary code execution, unsafe archive/update handling, DLL or library hijacking;
